@@ -2007,6 +2007,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       posts: [],
+      error: null,
       isLoading: false
     };
   },
@@ -2018,7 +2019,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("http://localhost:8000/api/posts").then(function (res) {
         _this.posts = res.data;
       })["catch"](function (err) {
-        console.error(err);
+        _this.error = "Errore durante il caricamento dei post";
       }).then(function () {
         _this.isLoading = false;
       });
@@ -2192,7 +2193,18 @@ var render = function render() {
     staticClass: "card-subtitle mb-2 text-muted"
   }, [_vm._v("Pubblicato il: " + _vm._s(_vm.publishedAt))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
-  }, [_vm._v(_vm._s(_vm.post.content))])])]);
+  }, [_vm._v(_vm._s(_vm.post.content))])]), _vm._v(" "), _c("div", {
+    staticClass: "card-footer d-flex justify-content-between"
+  }, [_c("span", {
+    staticClass: "badge badge-pill",
+    "class": "badge-".concat(_vm.post.category ? _vm.post.category.color : "light")
+  }, [_vm._v("\n            " + _vm._s(_vm.post.category ? _vm.post.category.label : "Nessuna") + "\n        ")]), _vm._v(" "), _c("div", _vm._l(_vm.post.tags, function (tag) {
+    return _c("span", {
+      key: tag.id,
+      staticClass: "badge mr-1 text-white",
+      style: "background-color: ".concat(tag.color)
+    }, [_vm._v("\n                " + _vm._s(tag.label) + "\n            ")]);
+  }), 0)])]);
 };
 
 var staticRenderFns = [];
@@ -2222,7 +2234,26 @@ var render = function render() {
     }
   }, [_c("h2", {
     staticClass: "mb-3"
-  }, [_vm._v("Posts")]), _vm._v(" "), _vm.isLoading ? _c("AppLoader") : _c("div", [_vm.posts.length ? _c("div", _vm._l(_vm.posts, function (post) {
+  }, [_vm._v("Posts")]), _vm._v(" "), _vm.isLoading ? _c("AppLoader") : _vm.error ? _c("div", {
+    staticClass: "alert alert-danger alert-dismissible fade show",
+    attrs: {
+      role: "alert"
+    }
+  }, [_c("p", [_vm._v(_vm._s(_vm.error))]), _vm._v(" "), _c("button", {
+    staticClass: "close",
+    attrs: {
+      type: "button"
+    },
+    on: {
+      click: function click($event) {
+        _vm.error = null;
+      }
+    }
+  }, [_c("span", {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("×")])])]) : _c("div", [_vm.posts.length ? _c("div", _vm._l(_vm.posts, function (post) {
     return _c("PostCard", {
       key: post.id,
       attrs: {

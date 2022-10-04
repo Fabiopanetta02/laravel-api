@@ -4,8 +4,16 @@
             <h5 class="card-title">{{ post.title }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">Pubblicato il: {{ publishedAt }}</h6>
             <p class="card-text">{{ post.content }}</p>
-            <!-- <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a> -->
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <span class="badge badge-pill" :class="`badge-${post.category ? post.category.color : 'light'}`">
+                {{ post.category ? post.category.label : 'Nessuna' }}
+            </span>
+            <div>
+                <span v-for="tag in post.tags" :key="tag.id" class="badge mr-1 text-white" :style="`background-color: ${tag.color}`">
+                    {{ tag.label }}
+                </span>
+            </div>
         </div>
     </div>
 </template>

@@ -3,6 +3,13 @@
     <h2 class="mb-3">Posts</h2>
     <AppLoader v-if="isLoading"/>
 
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" v-else-if="error">
+      <p>{{ error }}</p>
+      <button type="button" class="close" @click="error = null">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
     <div v-else>
       <div v-if="posts.length">
         <PostCard v-for="post in posts" :key="post.id" :post="post"/>
@@ -20,6 +27,7 @@ export default {
     data() {
         return {
             posts: [],
+            error: null,
             isLoading: false,
         };
     },
@@ -31,7 +39,7 @@ export default {
             this.posts = res.data;
           })
           .catch((err) => {
-            console.error(err);
+            this.error = "Errore durante il caricamento dei post";
           })
           .then(() => {
             this.isLoading = false;
