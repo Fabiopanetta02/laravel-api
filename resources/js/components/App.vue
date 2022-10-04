@@ -2,17 +2,19 @@
     <div class="content">
         <AppHeader :title="title"/>
         <main class="container mt-3">
-            Lista Post
+            <PostsList />
         </main>
     </div>
 </template>
 
 <script>
-import AppHeader from "./AppHeader"; 
+import AppHeader from "./AppHeader";
+import PostsList from "./posts/PostsList"; 
 export default {
     name: "App",
     components: {
-    AppHeader
+    AppHeader,
+    PostsList,
 },
     data(){
         return {
