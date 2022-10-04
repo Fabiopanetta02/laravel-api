@@ -1,19 +1,22 @@
 <template>
     <div class="content">
-        <Placeholder :title="title"/>
+        <AppHeader :title="title"/>
+        <main class="container mt-3">
+            Lista Post
+        </main>
     </div>
 </template>
 
 <script>
-import Placeholder from "./Placeholder" 
+import AppHeader from "./AppHeader"; 
 export default {
     name: "App",
-    components: { 
-        Placeholder 
-    },
+    components: {
+    AppHeader
+},
     data(){
         return {
-            title:"Coming Soon....",
+            title:"Boolpress",
         };
     },
 };
