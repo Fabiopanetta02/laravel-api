@@ -1,7 +1,11 @@
 <template>
     <div class="card my-3">
-        <div class="card-body">
+        <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="card-title">{{ post.title }}</h5>
+            <router-link :to="{name: 'post-detail', params: {slug: post.slug}}" class="btn btn-primary btn-sm">Vedi</router-link>
+        </div>
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">Autore: {{ post.author.name }}</h6>
             <h6 class="card-subtitle mb-2 text-muted">Pubblicato il: {{ publishedAt }}</h6>
             <p class="card-text">{{ post.content }}</p>
         </div>

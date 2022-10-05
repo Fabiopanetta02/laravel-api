@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'DESC')->with('category', 'tags')->get();
+        $posts = Post::orderBy('created_at', 'DESC')->with('category', 'tags', 'author')->get();
         return response()->json($posts);
     }
 
@@ -33,12 +33,14 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $post = Post::with('category', 'tags', 'author')->where('slug', $slug)->first();
+        if(!$post) return response()->json('Not found', 404);
+        return response()->json($post);
     }
 
     /**
